@@ -6,6 +6,20 @@ let winner;
 function startGame() {
     console.log("user: ", userChoice);
     console.log("cpu: ", getComputerChoice());
+    whoWon();
+    if (winner === "draw") {
+        console.log("It's a DRAW!");
+    }
+    else if (winner === "cpu") {
+        console.log("What a sad fate: YOU LOST!");
+    }
+    else if (winner === "user") {
+        console.log("Congratulations: YOU WON!");
+    }
+    else {
+        console.log("HOW THE F* DID YOU BREAK MY PROGRAM??");
+    }
+    
     
 }
 
@@ -34,27 +48,27 @@ function whoWon() {
             return winner;
             break;
         case (userChoice === "rock" && computerChoice === "scissors") :
-            winner = "draw";
+            winner = "user";
             return winner;
             break;
         case (userChoice === "rock" && computerChoice === "paper") :
-            winner = "draw";
+            winner = "cpu";
             return winner;
             break;
         case (userChoice === "paper" && computerChoice === "scissors") :
-            winner = "draw";
+            winner = "cpu";
             return winner;
             break;
         case (userChoice === "paper" && computerChoice === "rock") :
-            winner = "draw";
+            winner = "user";
             return winner;
             break;
         case (userChoice === "scissors" && computerChoice === "rock") :
-            winner = "draw";
+            winner = "cpu";
             return winner;
             break;
         case (userChoice === "scissors" && computerChoice === "paper") :
-            winner = "draw";
+            winner = "user";
             return winner;
             break;
     }
