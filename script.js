@@ -7,6 +7,28 @@ let score ='';
 let gameOver = false;
     
 
+const rockButton = document.querySelector('#rock');
+rockButton.addEventListener('click', () => {
+    userChoice = "rock";
+    startGame();
+});
+
+const paperButton = document.querySelector('#paper');
+paperButton.addEventListener('click', () => {
+    userChoice = "paper";
+    startGame();
+});
+
+const scissorsButton = document.querySelector('#scissors');
+scissorsButton.addEventListener('click', () => {
+    userChoice = "scissors";
+    startGame();
+});
+
+
+
+
+
 function checkGameOver () {
     if (userWinsCounter < 3 && computerWinsCounter < 3) {
         gameOver = false;
@@ -48,7 +70,7 @@ function startGame() {
     score = `SCORE: USER (${userWinsCounter}) x (${computerWinsCounter}) CPU`;
 
     console.log(score);
-    checkGameOver();
+    //checkGameOver(); - paused for now
 
    if (gameOver === true)
    {
