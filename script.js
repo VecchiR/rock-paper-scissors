@@ -3,6 +3,7 @@ let computerChoice;
 let winner;
 let userWinsCounter = 0;
 let computerWinsCounter = 0;
+let roundCounter = 0;
 let score ='';
 let gameOver = false;
     
@@ -26,7 +27,20 @@ scissorsButton.addEventListener('click', () => {
 });
 
 
+let roundDisplay = document.querySelector('#round');
+roundDisplay.textContent = roundDisplay.textContent + roundCounter;
 
+const choicesDisplay = document.querySelector('#choices');
+const outcomeDisplay = document.querySelector('#outcome');
+const scoreDisplay = document.querySelector('#score');
+const matchOverDisplay = document.querySelector('#match-over');
+
+updateRound();
+
+function updateRound () {
+    roundCounter++;
+    roundDisplay.textContent = `Round: ${roundCounter}`;
+}
 
 
 function checkGameOver () {
@@ -44,44 +58,59 @@ function checkGameOver () {
 
 
 function startGame() {
+    updateRound();
+
     console.log("user: ", userChoice);
     console.log("cpu: ", getComputerChoice());
+    choicesDisplay.textContent = `user chose: ${userChoice} | cpu chose: ${computerChoice}`;
 
     whoWon();
 
     if (winner === "draw") {
         console.log("It's a DRAW!");
+        outcomeDisplay.textContent = "It's a DRAW!";
     }
     
     else if (winner === "cpu") {
         computerWinsCounter++;
-        console.log("cpu scores!");
+        console.log("cpu scored!");
+        outcomeDisplay.textContent = "CPU scored!";
     }
     
     else if (winner === "user") {
         userWinsCounter++;
         console.log("you scored!");
+        outcomeDisplay.textContent = "YOU scored!";
     }
     
     else {
-        console.log("HOW THE F* DID YOU BREAK MY PROGRAM??");
+        console.log("DID YOU BREAK MY PROGRAM ON PURPOSE? YOU MONSTER!");
+        outcomeDisplay.textContent = "DID YOU BREAK MY PROGRAM ON PURPOSE? YOU MONSTER!";
     }
     
     score = `SCORE: USER (${userWinsCounter}) x (${computerWinsCounter}) CPU`;
 
     console.log(score);
-    //checkGameOver(); - paused for now
+    scoreDisplay.textContent = score;
+
+    checkGameOver(); 
 
    if (gameOver === true)
    {
         if (userWinsCounter > computerWinsCounter){
             console.log("THE MACHINE IS DEFEATED! REJOICE! - YOU WON");
+            matchOverDisplay.textContent = "THE MACHINE IS DEFEATED! REJOICE! - YOU WON";
         }
         else if (computerWinsCounter > userWinsCounter){
             console.log("WHAT A SAD FATE YOU ENCOUNTERED! - YOU LOST");
+            matchOverDisplay.textContent = "WHAT A SAD FATE YOU ENCOUNTERED! - YOU LOST";
         }
         computerWinsCounter = 0;
         userWinsCounter = 0;
+        roundCounter = 0;
+   }
+   else {
+    matchOverDisplay.textContent ='';
    }
 }
 
@@ -134,4 +163,5 @@ function whoWon() {
             return winner;
             break;
     }
+    winner = "no";
 }
